@@ -1,0 +1,24 @@
+{
+   "name" : "Laos",
+   "description" : "Laos Webside.",
+   "version" : "1.0",
+   "developer" : {
+      "email" : "winhtaikanug28@hotmail.com",
+      "name" : "Win Htaik Aung"
+   },
+   "launch_path" : "index.html",
+   "icons" : {
+      "128" : null,
+      "16" : null,
+      "48" : "/img/icons/app.png"
+   },
+   "default_locale" : "en",
+   "installs_allowed_from" : [
+      "*"
+   ],
+   "activities" : {
+      "dhis" : {
+         "href" : "*"
+      }
+   }
+}
