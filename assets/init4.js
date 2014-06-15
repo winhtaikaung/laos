@@ -114,6 +114,8 @@ $.ajax({
                                                    
                                                    //console.log($(this)[0].properties);
                                                break;
+                                               default:
+                                                   break;
                                                
                                           }
                                       });
