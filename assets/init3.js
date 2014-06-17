@@ -91,7 +91,7 @@ var obj=JSON.parse(localStorage.getItem("coordinates"));
 
 $.ajax({
 		//url:'http://localhost:8082/api/indicators.json',//Real scanerios will be live data
-		url:'http://localhost:8082/api/analytics.json?dimension=dx:g5y4gE5evOA&dimension=pe:2012&dimension=ou:IWp9dQGM0bS;OU_GROUP-jblbYwuvO33',//Real scanerios will be live data
+		url:hostname+"/api/analytics.json?dimension=dx:g5y4gE5evOA&dimension=pe:2012&dimension=ou:IWp9dQGM0bS;OU_GROUP-jblbYwuvO33",//Real scanerios will be live data
 		type: 'get',		
 		success: function (data) {
 			mdgdata=data;

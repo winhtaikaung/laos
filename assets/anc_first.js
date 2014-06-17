@@ -361,7 +361,7 @@ var obj=JSON.parse(localStorage.getItem("coordinates"));
 
 $.ajax({
 		//url:'http://localhost:8082/api/indicators.json',//Real scanerios will be live data
-		url:'http://localhost:8082/api/analytics.json?dimension=dx:kJQjz2RsnAD&dimension=pe:2012Oct&dimension=ou:IWp9dQGM0bS;OU_GROUP-Zh1inFu0Z2O',//Real scanerios will be live data
+		url:hostname+"/api/analytics.json?dimension=dx:kJQjz2RsnAD&dimension=pe:2012Oct&dimension=ou:IWp9dQGM0bS;OU_GROUP-Zh1inFu0Z2O",//Real scanerios will be live data
 		type: 'get',		
 		success: function (data) {
 			mdgdata=data;
@@ -512,8 +512,8 @@ Get Single Province coordi
                 
 
 		info.update = function (props) {
-			this._div.innerHTML = '<h4>DHIS Provincial Health map</h4>' +  (props ?
-				'<b>' + props.NAME_2 + '</b><br />' + props.datarate + ' people / mi<sup>2</sup>'
+			this._div.innerHTML = '<h4>ANC First Visit percentage</h4>' +  (props ?
+				'<b>' + props.NAME_2 + '</b><br />' + props.datarate + ' %<sup></sup>'
 				: 'Hover over a state');
 		};
                 

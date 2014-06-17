@@ -512,8 +512,8 @@ Get Single Province coordi
                 
 
 		info.update = function (props) {
-			this._div.innerHTML = '<h4>DHIS District Health map</h4>' +  (props ?
-				'<b>' + props.NAME_2 + '</b><br />' + props.datarate + ' people / mi<sup>2</sup>'
+			this._div.innerHTML = '<h4>Maternal Death</h4>' +  (props ?
+				'<b>' + props.NAME_2 + '</b><br />' + props.datarate + ' <sup></sup>'
 				: 'Hover over a state');
 		};
                 
