@@ -268,7 +268,7 @@ Get Single Province coordi
 
 		function zoomToFeature(e) {
 			map.fitBounds(e.target.getBounds());
-			map1.fitBounds(e.target.getBounds());
+			
 		}
 
 		function onEachFeature(feature, layer) {

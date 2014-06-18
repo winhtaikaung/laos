@@ -1,3 +1,7 @@
+var obj=JSON.parse(localStorage.getItem("coordinates"));
+
+
+
 $( document ).ready(function() {
 
 
@@ -357,7 +361,7 @@ $( document ).ready(function() {
   		}
 
 var mdgdata;
-var obj=JSON.parse(localStorage.getItem("coordinates"));
+
 
 $.ajax({
 		//url:'http://localhost:8082/api/indicators.json',//Real scanerios will be live data
@@ -450,13 +454,15 @@ var temp=JSON.parse(localStorage.getItem("coordinates"));
 
 function getColor(data){
 
-	return data < 0.0 ? '#FFEDA0' :
-                data < 5 ? '#FED976':
-		data < 10 ? '#FD8D3C':
-		data < 15 ? '#E31A1C':
-		data < 25 ? '#800026':
+	return data < 0.0 ? '#ca0020' :
+                data < 20 ? '#ef8a62':
+		data < 40 ? '#fddbc7':
+		data < 60 ? '#d1e5f0':
+		data < 80 ? '#67a9cf':
+                data < 100 ? '#2166ac':
+                
                    
-		 	'#FFEDA0';
+		 	'#b2182b';
 }
 
 
@@ -558,7 +564,8 @@ Get Single Province coordi
 
 		function zoomToFeature(e) {
 			map.fitBounds(e.target.getBounds());
-			map1.fitBounds(e.target.getBounds());
+                        
+			
 		}
 
 		function onEachFeature(feature, layer) {
@@ -566,6 +573,7 @@ Get Single Province coordi
 				mouseover: highlightFeature,
 				mouseout: resetHighlight,
 				click: zoomToFeature
+                                
 			});
 		}
 
@@ -590,7 +598,7 @@ var legend = L.control({position: 'bottomright'});
 		legend.onAdd = function (map) {
 
 			var div = L.DomUtil.create('div', 'info legend'),
-				grades = [0,5,10,15,25],
+				grades = [0,20,40,60,80,100],
 				labels = [],
 				from, to;
 

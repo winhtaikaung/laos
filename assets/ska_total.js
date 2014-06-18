@@ -450,13 +450,16 @@ var temp=JSON.parse(localStorage.getItem("coordinates"));
 
 function getColor(data){
 
-	return data < 0.0 ? '#FFEDA0' :
-                data < 5 ? '#FED976':
-		data < 10 ? '#FD8D3C':
-		data < 15 ? '#E31A1C':
-		data < 25 ? '#800026':
+	return data < 0 ? '#f7fcf5' :
+                data < 200 ? '#e5f5e0':
+		data <  400 ? '#c7e9c0':
+		data < 600 ? '#a1d99b':
+		data < 800 ? '#74c476':
+                data < 1000 ? '#41ab5d':
+                data < 1200 ? '#238b45':
+                data < 1400 ? '#005a32':
                    
-		 	'#FFEDA0';
+		 	'#005a32';
 }
 
 
@@ -558,7 +561,7 @@ Get Single Province coordi
 
 		function zoomToFeature(e) {
 			map.fitBounds(e.target.getBounds());
-			map1.fitBounds(e.target.getBounds());
+			
 		}
 
 		function onEachFeature(feature, layer) {
@@ -590,7 +593,7 @@ var legend = L.control({position: 'bottomright'});
 		legend.onAdd = function (map) {
 
 			var div = L.DomUtil.create('div', 'info legend'),
-				grades = [0,5,10,15,25],
+				grades = [0,200,400,600,800,1000,1200,1400],
 				labels = [],
 				from, to;
 
