@@ -88,7 +88,7 @@ $( document ).ready(function() {
 
 var mdgdata;
 var obj=JSON.parse(localStorage.getItem("coordinates"));
-
+/*
 $.ajax({
 		//url:'http://localhost:8082/api/indicators.json',//Real scanerios will be live data
 		url:hostname+"/api/analytics.json?dimension=dx:g5y4gE5evOA&dimension=pe:2011&dimension=ou:IWp9dQGM0bS;OU_GROUP-jblbYwuvO33",//Real scanerios will be live data
@@ -140,7 +140,7 @@ $.ajax({
 	});
         
 
-
+*/
 
 
 
@@ -334,7 +334,7 @@ $.get("linePlusBarData.json",function(data){
 
 //############### Chart ################
 d3.json("linePlusBarData.json",function(error,data) {
-  nv.addGraph(function() {
+  /* nv.addGraph(function() {
       var chart = nv.models.linePlusBarChart()
             .margin({top: 0, right: 60, bottom: 20, left: 70})
             //We can set x data accessor to use index. Reason? So the bars all appear evenly spaced.
@@ -364,7 +364,7 @@ d3.json("linePlusBarData.json",function(error,data) {
       nv.utils.windowResize(chart.update);
 
       return chart;
-  });
+  });*/
   
   
   
@@ -387,7 +387,7 @@ d3.json("linePlusBarData.json",function(error,data) {
 });*/
 
 //Donut chart example
-nv.addGraph(function() {
+/*nv.addGraph(function() {
   var chart = nv.models.pieChart()
       .x(function(d) { return d.label })
       .y(function(d) { return d.value })
@@ -405,9 +405,9 @@ nv.addGraph(function() {
 
   return chart;
 });
-
+*/
 //##################### Bubble Chart EXAMPLE ######################
-	nv.addGraph(function() {
+/*	nv.addGraph(function() {
   var chart = nv.models.scatterChart()
                 .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                 .showDistY(true)
@@ -434,7 +434,7 @@ nv.addGraph(function() {
   nv.utils.windowResize(chart.update);
 
   return chart;
-});
+});*/
 
 /**************************************
  * Simple test data generator
@@ -512,9 +512,155 @@ function exampleData() {
 
 
 
-		
 
 	
 });
 
+    $(function () {
+		var dataArray = [];
+		$.get("./assets/data/LAO_National_Maternal_Mortality.json",function(data){
+			
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","1995"));
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2000"));
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2005"));
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2010"));
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2013"));
+    		
+	    	$('#chart')
+	    	.highcharts({
+	            title: {
+	                text: 'Maternal mortality ratio',
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: 'Source: MOH',
+	                x: -20
+	            },
+	            xAxis: {
+	                categories: ['1995', '2000', '2005', '2010', '2013']
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'Deaths per 100000 live birth'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                },
+	                {
+					    color: 'red', // Color value
+					    width: 2,
+					    value: '260', // Value of where the line will appear
+					    label: { 
+					    text: 'Target 2015: 260', // Content of the label. 
+					    align: 'left' // Positioning of the label.  
+					  }    
+					 },
+					  
+	                ]
+	            },
+	            tooltip: {
+	                valueSuffix: ' Deaths per 100000 live birth'
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'middle',
+	                borderWidth: 0
+	            },
+	            series: [{
+	                name: 'Maternal mortality ratio',
+	                data: dataArray,
+	            }]
+	        });		
+		},'json');
+			
 
+    });
+    
+    $(function () {
+		var dataArray = [];
+		dataArray[0]=[];
+		dataArray[1]=[];
+		$.get("./assets/data/LAO_Under_5_Mortality_And_Infant_Mortality.json",function(data){
+			
+    		dataArray[0].push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","1995"));
+    		dataArray[0].push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2000"));
+    		dataArray[0].push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2005"));
+    		dataArray[0].push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2010"));
+    		
+    		dataArray[1].push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","1995"));
+    		dataArray[1].push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2000"));
+    		dataArray[1].push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2005"));
+    		dataArray[1].push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2010"));
+    		
+    		
+	    	$('#buble_chart')
+	    	.highcharts({
+	            title: {
+	                text: 'Under 5 Mortality and infant mortality',
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: 'Source: MOH',
+	                x: -20
+	            },
+	            xAxis: {
+	                categories: ['1995', '2000', '2005', '2010']
+	            },
+	            yAxis: {
+	            	min: 0,
+	                title: {
+	                    text: 'Rate (per 1000 live birhts)'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                },
+	                {
+					    color: 'red', // Color value
+					    width: 1,
+					    value: 45, // Value of where the line will appear
+					    label: { 
+					    text: 'Infant mortality target 2015: 45', // Content of the label. 
+					    align: 'left' // Positioning of the label.  
+					  	}    
+					 },
+	                {
+					    color: 'red', // Color value
+					    width: 1,
+					    value: 70, // Value of where the line will appear
+					    label: { 
+					    text: 'Under 5 mortality target 2015: 70', // Content of the label. 
+					    align: 'left' // Positioning of the label.  
+					  	}
+					  }
+					  
+					  
+	                ]
+	            },
+	            tooltip: {
+	                valueSuffix: ' per 1000 live births'
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'middle',
+	                borderWidth: 0
+	            },
+	            series: [{
+	                name: 'Under 5 Mortality rate',
+	                data: dataArray[0],
+	            },
+	            {
+	            	name: 'Infant Mortality rate',
+	                data: dataArray[1],
+	            }
+	            ]
+	        });		
+		},'json');
+			
+
+    });
