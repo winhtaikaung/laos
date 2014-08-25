@@ -89,6 +89,7 @@ $( document ).ready(function() {
 var mdgdata;
 var obj=JSON.parse(localStorage.getItem("coordinates"));
 
+/*
 $.ajax({
 		//url:'http://localhost:8082/api/indicators.json',//Real scanerios will be live data
 		url:hostname+"/api/analytics.json?dimension=dx:g5y4gE5evOA&dimension=pe:2011&dimension=ou:IWp9dQGM0bS;OU_GROUP-jblbYwuvO33",//Real scanerios will be live data
@@ -140,7 +141,7 @@ $.ajax({
 	});
         
 
-
+*/
 
 
 
@@ -334,7 +335,7 @@ $.get("linePlusBarData.json",function(data){
 
 //############### Chart ################
 d3.json("linePlusBarData.json",function(error,data) {
-  nv.addGraph(function() {
+/*  nv.addGraph(function() {
       var chart = nv.models.linePlusBarChart()
             .margin({top: 0, right: 60, bottom: 20, left: 70})
             //We can set x data accessor to use index. Reason? So the bars all appear evenly spaced.
@@ -366,7 +367,7 @@ d3.json("linePlusBarData.json",function(error,data) {
       return chart;
   });
   
-  
+  */
   
   
  //####################  PIE CHART ######################
@@ -387,7 +388,7 @@ d3.json("linePlusBarData.json",function(error,data) {
 });*/
 
 //Donut chart example
-nv.addGraph(function() {
+/*nv.addGraph(function() {
   var chart = nv.models.pieChart()
       .x(function(d) { return d.label })
       .y(function(d) { return d.value })
@@ -405,9 +406,9 @@ nv.addGraph(function() {
 
   return chart;
 });
-
+*/
 //##################### Bubble Chart EXAMPLE ######################
-	nv.addGraph(function() {
+	/*nv.addGraph(function() {
   var chart = nv.models.scatterChart()
                 .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                 .showDistY(true)
@@ -435,7 +436,7 @@ nv.addGraph(function() {
 
   return chart;
 });
-
+*/
 /**************************************
  * Simple test data generator
  */
@@ -543,7 +544,86 @@ $("a[data-rel='MDG7']").click(function(){
 });
 		
 
-	
 });
 
 
+$(function () {
+	var dataArray = [];
+	dataArray[0]=[];
+	dataArray[1]=[];
+		$.get("./assets/data/LAO_MDG1.json",function(data){
+			
+			//stunting
+			
+			var y1995 = UTIL.getValue(data,"EL5HbsTs0jZ","IWp9dQGM0bS","1995");
+			var y2000 = UTIL.getValue(data,"EL5HbsTs0jZ","IWp9dQGM0bS","2000");
+			var y2005 = UTIL.getValue(data,"EL5HbsTs0jZ","IWp9dQGM0bS","2005");
+			var y2010 = UTIL.getValue(data,"EL5HbsTs0jZ","IWp9dQGM0bS","2010");
+    		dataArray[0].push([1995,y1995,y1995]);
+    		dataArray[0].push([2000,y2000,y2000]);
+    		dataArray[0].push([2005,y2005,y2005]);
+    		dataArray[0].push([2010,y2010,y2010]);
+    		
+    		//underweight
+    		var y1995 = UTIL.getValue(data,"L7QBAwWjzeC","IWp9dQGM0bS","1995");
+			var y2000 = UTIL.getValue(data,"L7QBAwWjzeC","IWp9dQGM0bS","2000");
+			var y2005 = UTIL.getValue(data,"L7QBAwWjzeC","IWp9dQGM0bS","2005");
+			var y2010 = UTIL.getValue(data,"L7QBAwWjzeC","IWp9dQGM0bS","2010");
+    		dataArray[1].push([1995,y1995,y1995]);
+    		dataArray[1].push([2000,y2000,y2000]);
+    		dataArray[1].push([2005,y2005,y2005]);
+    		dataArray[1].push([2010,y2010,y2010]);
+    		
+    $('#chart2').highcharts({
+
+        chart: {
+            type: 'bubble',
+            zoomType: 'xy'
+        },
+
+        title: {
+            text: 'Stunting and underweight'
+        },
+        subtitle: {
+	                text: 'Source: NCHS',
+	                x: -20
+		},
+		yAxis: {
+	                title: {
+	                    text: '%'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                },
+	                {
+					    color: 'red', // Color value
+					    width: 2,
+					    value: 34, // Value of where the line will appear
+					    label: { 
+					    text: 'Stunting Target 2015: 34%', // Content of the label. 
+					    align: 'left' // Positioning of the label.  
+					  	}
+					  },
+					  {
+					    color: 'red', // Color value
+					    width: 2,
+					    value: 22, // Value of where the line will appear
+					    label: { 
+					    text: 'Underweight Target 2015: 22%', // Content of the label. 
+					    align: 'left' // Positioning of the label.  
+					  	}
+					  }
+	                ]
+	            },
+        series: [{
+        	name: 'Stunting',
+            data: dataArray[0] 
+        }, {
+        	name: 'Underweight',
+            data: dataArray[1]
+        }]
+   });
+  });
+});
