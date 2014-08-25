@@ -516,6 +516,71 @@ function exampleData() {
 	
 });
 
+$(function () {
+		var dataArray = [];
+		$.get("./assets/data/LAO_proportion_of_1yearold_children_immunized_against_measles.json",function(data){
+			
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","1995"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2000"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2005"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2010"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2012"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2013"));
+    		
+	    	$('#chart2')
+	    	.highcharts({
+	            title: {
+	                text: 'Proportion of 1 year old children immunized against measles',
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: 'Source: MOH',
+	                x: -20
+	            },
+	            xAxis: {
+	                categories: ['1995', '2000', '2005', '2010', '2012', '2013']
+	            },
+	            yAxis: {
+	            	max: 100,
+	                title: {
+	                    text: '%'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                },
+	                {
+					    color: 'red', // Color value
+					    width: 2,
+					    value: '90', // Value of where the line will appear
+					    label: { 
+					    text: 'Target 2015: 90%', // Content of the label. 
+					    align: 'left' // Positioning of the label.  
+					  }    
+					 },
+					  
+	                ]
+	            },
+	            tooltip: {
+	                valueSuffix: ' %'
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'middle',
+	                borderWidth: 0
+	            },
+	            series: [{
+	                name: 'Immunized against measles',
+	                data: dataArray,
+	            }]
+	        });		
+		},'json');
+			
+
+    });
+
     $(function () {
 		var dataArray = [];
 		$.get("./assets/data/LAO_National_Maternal_Mortality.json",function(data){
@@ -621,7 +686,7 @@ function exampleData() {
 	                },
 	                {
 					    color: 'red', // Color value
-					    width: 1,
+					    width: 2,
 					    value: 45, // Value of where the line will appear
 					    label: { 
 					    text: 'Infant mortality target 2015: 45', // Content of the label. 
@@ -630,7 +695,7 @@ function exampleData() {
 					 },
 	                {
 					    color: 'red', // Color value
-					    width: 1,
+					    width: 2,
 					    value: 70, // Value of where the line will appear
 					    label: { 
 					    text: 'Under 5 mortality target 2015: 70', // Content of the label. 
