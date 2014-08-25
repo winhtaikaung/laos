@@ -581,20 +581,21 @@ $(function () {
 
     });
 
-    $(function () {
+$(function () {
 		var dataArray = [];
-		$.get("./assets/data/LAO_National_Maternal_Mortality.json",function(data){
+		$.get("./assets/data/LAO_proportion_of_1yearold_children_immunized_against_measles.json",function(data){
 			
-    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","1995"));
-    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2000"));
-    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2005"));
-    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2010"));
-    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2013"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","1995"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2000"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2005"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2010"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2012"));
+    		dataArray.push(UTIL.getValue(data,"qyRWDqh7fn2","IWp9dQGM0bS","2013"));
     		
-	    	$('#chart')
+	    	$('#chart2')
 	    	.highcharts({
 	            title: {
-	                text: 'Maternal mortality ratio',
+	                text: 'Proportion of 1 year old children immunized against measles',
 	                x: -20 //center
 	            },
 	            subtitle: {
@@ -602,11 +603,12 @@ $(function () {
 	                x: -20
 	            },
 	            xAxis: {
-	                categories: ['1995', '2000', '2005', '2010', '2013']
+	                categories: ['1995', '2000', '2005', '2010', '2012', '2013']
 	            },
 	            yAxis: {
+	            	max: 100,
 	                title: {
-	                    text: 'Deaths per 100000 live birth'
+	                    text: '%'
 	                },
 	                plotLines: [{
 	                    value: 0,
@@ -616,9 +618,9 @@ $(function () {
 	                {
 					    color: 'red', // Color value
 					    width: 2,
-					    value: '260', // Value of where the line will appear
+					    value: '90', // Value of where the line will appear
 					    label: { 
-					    text: 'Target 2015: 260', // Content of the label. 
+					    text: 'Target 2015: 90%', // Content of the label. 
 					    align: 'left' // Positioning of the label.  
 					  }    
 					 },
@@ -626,7 +628,7 @@ $(function () {
 	                ]
 	            },
 	            tooltip: {
-	                valueSuffix: ' Deaths per 100000 live birth'
+	                valueSuffix: ' %'
 	            },
 	            legend: {
 	                layout: 'vertical',
@@ -635,7 +637,7 @@ $(function () {
 	                borderWidth: 0
 	            },
 	            series: [{
-	                name: 'Maternal mortality ratio',
+	                name: 'Immunized against measles',
 	                data: dataArray,
 	            }]
 	        });		
@@ -643,28 +645,21 @@ $(function () {
 			
 
     });
-    
+
     $(function () {
 		var dataArray = [];
-		dataArray[0]=[];
-		dataArray[1]=[];
 		$.get("./assets/data/LAO_Under_5_Mortality_And_Infant_Mortality.json",function(data){
 			
-    		dataArray[0].push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","1995"));
-    		dataArray[0].push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2000"));
-    		dataArray[0].push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2005"));
-    		dataArray[0].push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2010"));
     		
-    		dataArray[1].push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","1995"));
-    		dataArray[1].push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2000"));
-    		dataArray[1].push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2005"));
-    		dataArray[1].push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2010"));
+    		dataArray.push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","1995"));
+    		dataArray.push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2000"));
+    		dataArray.push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2005"));
+    		dataArray.push(UTIL.getValue(data,"yEZy081YBCE","IWp9dQGM0bS","2010"));
     		
-    		
-	    	$('#buble_chart')
+			$('#chart')
 	    	.highcharts({
 	            title: {
-	                text: 'Under 5 Mortality and infant mortality',
+	                text: 'Under 5 Mortality',
 	                x: -20 //center
 	            },
 	            subtitle: {
@@ -692,7 +687,62 @@ $(function () {
 					    text: 'Infant mortality target 2015: 45', // Content of the label. 
 					    align: 'left' // Positioning of the label.  
 					  	}    
-					 },
+					 } 
+					  
+	                ]
+	            },
+	            tooltip: {
+	                valueSuffix: ' per 1000 live births'
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'middle',
+	                borderWidth: 0
+	            },
+	            series: [{
+	                name: 'Under 5 Mortality rate',
+	                data: dataArray,
+	            }
+	            ]
+	        });		
+		},'json');
+			
+
+    });
+    
+    $(function () {
+		var dataArray = [];
+		$.get("./assets/data/LAO_Under_5_Mortality_And_Infant_Mortality.json",function(data){
+			
+    		dataArray.push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","1995"));
+    		dataArray.push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2000"));
+    		dataArray.push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2005"));
+    		dataArray.push(UTIL.getValue(data,"ba4kI0OilbX","IWp9dQGM0bS","2010"));
+    		
+    		
+	    	$('#buble_chart')
+	    	.highcharts({
+	            title: {
+	                text: 'Infant mortality',
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: 'Source: MOH',
+	                x: -20
+	            },
+	            xAxis: {
+	                categories: ['1995', '2000', '2005', '2010']
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'Rate (per 1000 live birhts)'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                },
 	                {
 					    color: 'red', // Color value
 					    width: 2,
@@ -716,12 +766,8 @@ $(function () {
 	                borderWidth: 0
 	            },
 	            series: [{
-	                name: 'Under 5 Mortality rate',
-	                data: dataArray[0],
-	            },
-	            {
 	            	name: 'Infant Mortality rate',
-	                data: dataArray[1],
+	                data: dataArray,
 	            }
 	            ]
 	        });		

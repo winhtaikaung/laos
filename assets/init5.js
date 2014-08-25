@@ -88,7 +88,7 @@ $( document ).ready(function() {
 
 var mdgdata;
 var obj=JSON.parse(localStorage.getItem("coordinates"));
-
+/*
 $.ajax({
 		//url:'http://localhost:8082/api/indicators.json',//Real scanerios will be live data
 		url:hostname+"/api/analytics.json?dimension=dx:g5y4gE5evOA&dimension=pe:2011&dimension=ou:IWp9dQGM0bS;OU_GROUP-jblbYwuvO33",//Real scanerios will be live data
@@ -139,7 +139,7 @@ $.ajax({
 
 	});
         
-
+*/
 
 
 
@@ -334,7 +334,7 @@ $.get("linePlusBarData.json",function(data){
 
 //############### Chart ################
 d3.json("linePlusBarData.json",function(error,data) {
-  nv.addGraph(function() {
+/*  nv.addGraph(function() {
       var chart = nv.models.linePlusBarChart()
             .margin({top: 0, right: 60, bottom: 20, left: 70})
             //We can set x data accessor to use index. Reason? So the bars all appear evenly spaced.
@@ -366,7 +366,7 @@ d3.json("linePlusBarData.json",function(error,data) {
       return chart;
   });
   
-  
+  */
   
   
  //####################  PIE CHART ######################
@@ -387,7 +387,7 @@ d3.json("linePlusBarData.json",function(error,data) {
 });*/
 
 //Donut chart example
-nv.addGraph(function() {
+/*nv.addGraph(function() {
   var chart = nv.models.pieChart()
       .x(function(d) { return d.label })
       .y(function(d) { return d.value })
@@ -405,9 +405,9 @@ nv.addGraph(function() {
 
   return chart;
 });
-
+*/
 //##################### Bubble Chart EXAMPLE ######################
-	nv.addGraph(function() {
+/*	nv.addGraph(function() {
   var chart = nv.models.scatterChart()
                 .showDistX(true)    //showDist, when true, will display those little distribution lines on the axis.
                 .showDistY(true)
@@ -435,7 +435,7 @@ nv.addGraph(function() {
 
   return chart;
 });
-
+*/
 /**************************************
  * Simple test data generator
  */
@@ -536,3 +536,125 @@ $("a[data-rel='MDG5']").click(function(){
 });
 
 
+$(function () {
+		var dataArray = [];
+		$.get("./assets/data/LAO_National_Maternal_Mortality.json",function(data){
+			
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","1995"));
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2000"));
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2005"));
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2010"));
+    		dataArray.push(UTIL.getValue(data,"ixa2AVsyJGb","IWp9dQGM0bS","2013"));
+    		
+	    	$('#chart2').highcharts({
+	            title: {
+	                text: 'Maternal mortality ratio',
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: 'Source: MOH',
+	                x: -20
+	            },
+	            xAxis: {
+	                categories: ['1995', '2000', '2005', '2010', '2013']
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'Deaths per 100000 live birth'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                },
+	                {
+					    color: 'red', // Color value
+					    width: 2,
+					    value: '260', // Value of where the line will appear
+					    label: { 
+					    text: 'Target 2015: 260', // Content of the label. 
+					    align: 'left' // Positioning of the label.  
+					  }    
+					 },
+					  
+	                ]
+	            },
+	            tooltip: {
+	                valueSuffix: ' Deaths per 100000 live birth'
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'middle',
+	                borderWidth: 0
+	            },
+	            series: [{
+	                name: 'Maternal mortality ratio',
+	                data: dataArray,
+	            }]
+	        });		
+		},'json');
+			
+
+    });
+    
+    $(function () {
+		var dataArray = [];
+		$.get("./assets/data/LAO_Proportion_of_births_attended_by_skilled_birth_personnel.json",function(data){
+			
+    		dataArray.push(UTIL.getValue(data,"n5vkntzvGcj","IWp9dQGM0bS","1995"));
+    		dataArray.push(UTIL.getValue(data,"n5vkntzvGcj","IWp9dQGM0bS","2000"));
+    		dataArray.push(UTIL.getValue(data,"n5vkntzvGcj","IWp9dQGM0bS","2005"));
+    		dataArray.push(UTIL.getValue(data,"n5vkntzvGcj","IWp9dQGM0bS","2010"));
+    		
+	    	$('#chart').highcharts({
+	            title: {
+	                text: 'Proportion of births attended by skilled birth personnel',
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: 'Source: MOH',
+	                x: -20
+	            },
+	            xAxis: {
+	                categories: ['1995', '2000', '2005', '2010']
+	            },
+	            yAxis: {
+	                title: {
+	                    text: '%'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                },
+	                {
+					    color: 'red', // Color value
+					    width: 2,
+					    value: '50', // Value of where the line will appear
+					    label: { 
+					    text: 'Target 2015: 50%', // Content of the label. 
+					    align: 'left' // Positioning of the label.  
+					  }    
+					 },
+					  
+	                ]
+	            },
+	            tooltip: {
+	                valueSuffix: ' %'
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'middle',
+	                borderWidth: 0
+	            },
+	            series: [{
+	                name: 'SBA',
+	                data: dataArray,
+	            }]
+	        });		
+		},'json');
+			
+
+    });
